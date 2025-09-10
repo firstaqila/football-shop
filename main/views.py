@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 def show_main(request):
     context = {
-        'app_name': 'Football Shop',
+        'app_name': 'Slide & Score',
         'name': 'Saffana Firsta Aqila',
         'class': 'PBP B'
     }
