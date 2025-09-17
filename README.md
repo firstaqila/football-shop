@@ -353,13 +353,14 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 ```
 
-9. Setelah proses development berhasil, buka Postman dan buat sebuah request baru dengan method `GET` dari url-url yang terdaftar. Salin tiap url dan klik tombol `Send` untuk mengirim request tersebut. Pastikan untuk menjalankan server terlebih dahulu. Berikut hasil akses url pada Postman untuk tugas 3:
+### Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam `README.md`
+Setelah proses development berhasil, buka Postman dan buat sebuah request baru dengan method `GET` dari url-url yang terdaftar. Salin tiap url dan klik tombol `Send` untuk mengirim request tersebut. Pastikan untuk menjalankan server terlebih dahulu. Berikut hasil akses url pada Postman untuk tugas 3:
 - [http://localhost:8000/xml/](https://drive.google.com/file/d/16dCYYyUvDzpv48RNahZe6HVVJhh2nSAg/view?usp=share_link)
 - [http://localhost:8000/json/](https://drive.google.com/file/d/1vMUbkJjjLtVP7LxygDGsQEAAhDVzmZqP/view?usp=share_link)
 - [http://localhost:8000/xml/[product_id]/](https://drive.google.com/file/d/19cU6jMTH6L7knBVZK4sStCzOjoS7zspu/view?usp=share_link)
 - [http://localhost:8000/json/[product_id]/](https://drive.google.com/file/d/1In3YPSC3qNhhwBIfWWuIUdrvI_dmPVMW/view?usp=share_link)
 
-10. Menerapkan perubahan pada GitHub dan PWS.
+### Menerapkan perubahan pada GitHub dan PWS.
 
-### Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
+## Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
 Tidak ada
