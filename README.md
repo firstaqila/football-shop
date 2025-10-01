@@ -440,3 +440,129 @@ Buat dua akun pengguna pada laman registrasi. Kemudian login pada masing-masing 
 6. Terakhir, pada `main.html` di `main/templates`, tambahkan kode `<h5>Sesi terakhir login: {{ last_login }}</h5>` untuk menampilkan `last_login` pengguna.
 
 ### Melakukan add-commit-push ke GitHub dan PWS
+
+# Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS
+
+## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+Prioritas CSS selector ditentukan oleh sebuah prinsip yang disebut spesifisitas, dengan urutan sebagai berikut: 
+1. Inline Styles -> spesifisitas tertinggi
+2. Id Selectors
+3. Classes, Attribute Selectors, dan Pseudo-classes
+4. Elements dan Pseudo-elements
+5. Universal Selectors -> spesifisitas terendah
+
+- Aturan 1: Jika terdapat beberapa CSS selector yang menargetkan elemen HTML yang sama, maka CSS selector dengan spesifisitas tertinggi (dari lainnya) yang akan diterapkan. CSS selector tersebut akan meng-override CSS selector lainnya yang lebih rendah.
+- Aturan 2: Namun, jika terdapat beberapa CSS selector dengan tingkat spesifisitas yang sama dan semuanya menargetkan elemen HTML yang sama, maka CSS selector yang dedefinisikan paling akhir di dalam kode yang akan diterapkan.
+
+## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!
+
+1. Menghemat Waktu dan Biaya Pengembangan
+Responsive design menghilangkan kebutuhan developer untuk membangun dan memelihara dua versi aplikasi web yang terpisah (satu untuk desktop, satu untuk mobile). Implementasinya secara signifikan menghemat waktu dan biaya pengembangan, juga pemeliharaan dalam jangka panjang. Selain itu, semua konten cukup dikelola dalam satu basis kode, di mana setiap perubahan akan secara otomatis diterapkan di semua perangkat. Hal ini membuat proses pembaruan konten menjadi jauh lebih cepat dan efisien.
+
+2. Meningkatkan User Experience
+Aplikasi web yang responsif memberikan pengalaman yang konsisten dan mulus bagi pengguna. Mereka dapat dengan mudah bernavigasi dan berinteraksi dengan semua elemen aplikasi secara nyaman, terlepas dari ukuran layar perangkat yang mereka gunakan. Hal ini menciptakan pengalaman yang profesional dan meningkatkan kepuasan pengguna. 
+
+- Contoh aplikasi yang sudah menerapkan responsive design: [YouTube](https://www.youtube.com/)
+- Contoh aplikasi yang belum menerapkan responsive design: [Deque University Website](https://dequeuniversity.com/library/responsive/1-non-responsive)
+
+Penjelasannya: 
+Lakukan inspect pada browser untuk melihat apakah sebuah aplikasi sudah atau belum menerapkan responsive design. Klik tombol berbentuk 📱 untuk mensimulasikan tampilan pada berbagai perangkat.
+
+YouTube sudah menerapkan responsive design, ditunjukkan dengan:
+- Teks/gambar menyesuaikan layar (dapat mengecil/membesar).
+- Layout menyesuaikan layar. Misalnya 3 kolom di desktop → menjadi 1 kolom di mobile.
+
+Deque University Website belum menerapkan responsive design, ditunjukkan dengan:
+- Teks/gambar tidak menyesuaikan layar. Untuk layar kecil, teks/gambar kepotong.
+- Layout tidak menyesuaikan layar (meskipun ukuran layar mengecil).
+
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+1. Letak
+- **Padding** adalah ruang transparan di bagian dalam sebuah elemen. Padding berada di antara konten dan border.
+- **Border** adalah garis yang membungkus sebuah elemen. Border berada tepat di luar padding dan di dalam margin.Garis ini dapat diatur ketebalan, gaya, dan warnanya.
+- **Margin** adalah ruang transparan di bagian luar border sebuah elemen.
+
+2. Kegunaan Utama
+- **Padding**: Memberi ruang untuk konten agar tidak terlihat sempit, meningkatkan keterbacaan dan estetika visual.
+- **Border**: Memberi batas visual yang jelas untuk sebuah elemen, sebagai elemen dekoratif, memisahkan satu elemen dengan elemen lainnya secara visual.
+- **Margin**: Mengatur jarak antar elemen, memberi tata letak yang rapi.
+
+3. Cara Implementasi
+- **Padding**:
+``` css
+.contoh-elemen {
+  /* Mengatur padding 30px untuk semua sisi */
+  padding: 30px;
+
+  /* Shorthand: atas, kanan, bawah, kiri */
+  padding: 20px 25px 20px 25px;
+
+  /* Mengatur sisi tertentu secara spesifik */
+  padding-top: 20px;
+  padding-right: 25px;
+  padding-bottom: 20px;
+  padding-left: 25px;
+}
+```
+- **Border**:
+``` css
+.contoh-elemen {
+  /* Shorthand: ketebalan, gaya, warna */
+  border: 3px solid #333333;
+
+  /* Mengatur sisi tertentu secara spesifik */
+  border-bottom: 5px dotted red;
+
+  /* Properti individual */
+  border-width: 3px;
+  border-style: solid;
+  border-color: #333333;
+}
+```
+- **Margin**:
+``` css
+.contoh-elemen {
+  /* Mengatur margin 30px untuk semua sisi */
+  margin: 30px;
+
+  /* Shorthand: atas, kanan, bawah, kiri */
+  margin: 20px 25px 20px 25px;
+
+  /* Mengatur sisi tertentu secara spesifik */
+  margin-top: 20px;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  margin-left: 25px;
+
+  /* Menengahkan elemen block */
+  margin-left: auto;
+  margin-right: auto;
+  /* Shorthand */
+  margin: 0 auto;
+}
+```
+
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+
+1. Flex Box
+- Konsep: Model tata letak satu dimensi yang dirancang untuk mengatur elemen dalam satu arah, yakni horizontal (baris) atau vertikal (kolom). Flex box memungkinkan elemen-elemen di dalam sebuah container untuk menyesuaikan ukuran, jarak, dan posisi secara dinamis berdasarkan ruang yang tersedia. Komponennya terdiri atas flex container (parent `<div>` element) dan flex items (items inside the parent `<div>`).
+- Kegunaan: Membuat layout satu dimensi, membantu pengaturan alignment konten, mendukung space distribution secara fleksibel, mudah digunakan untuk responsive design.
+
+2. Grid
+- Konsep: Model tata letak dua dimensi yang dirancang untuk mengatur elemen dalam baris dan kolom secara bersamaan. Grid memberikan kontrol yang lebih terperinci terhadap tata letak dibandingkan flex box karena grid memungkinkan pengaturan posisi elemen dalam struktur kotak-kotak (grid). Komponennya terdiri atas grid container (parent `<div>` element) dan grid items (items inside the parent `<div>`).
+- Kegunaan: Membuat layout dua dimensi, memungkinkan pembuatan struktur layout yang kompleks dengan area-area yang jelas, mendukung overlapping, mudah digunakan untuk responsive layout.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+1. Hubungkan template Django dan Tailwind pada `templates/base.html` dengan  kode `<script src="https://cdn.tailwindcss.com"></script>`. Kemudian, pada file yang sama, tambahkan tag `<meta name="viewport">` agar halaman web dapat menyesuaikan ukuran dan perilaku perangkat mobile.
+2. Implementasikan fitur baru bernama `edit_product` dan `delete_product` pada `main/views.py`. Kemudian, tambahkan path url kedua fungsi tersebut pada `main/urls.py`.
+3. Konfigurasikan static files pada `football_shop/settings.py`.
+4. Buat direktori baru `static/css` yang berisi file `global.css`. Pada file tersebut kita dapat menambahkan custom class atau CSS style yang didefinisikan sendiri. Kemudian, agar CSS style yang ditambahkan pada `global.css` dapat digunakan dalam template Django, tambahkan kode `<link rel="stylesheet" href="{% static 'css/global.css' %}"/>` pada `templates/base.html`. Tidak lupa kustomisasi file `global.css` nya.
+5. Kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya menggunakan CSS framework (Tailwind) dengan detail sebagai berikut:
+    - Kustomisasi halaman login, register, tambah product, edit product, dan detail product. Untuk edit product, tambahkan file baru `edit_product.html` pada `main/templates`
+    - Kustomisasi halaman daftar product dengan memperhatikan kondisi: Jika belum ada product yang tersimpan, halaman daftar product akan menampilkan gambar dan pesan bahwa belum ada product yang terdaftar. Gambar disimpan pada `static/image` dengan nama `no-product.png`. Namun, jika sudah ada product yang tersimpan, halaman daftar product akan menampilkan detail dari setiap product menggunakan card. Oleh karena itu, tambahkan file baru `card_product.html` pada `main/templates` untuk mengimplementasikan hal ini. 
+    - Pada `card_product.html`, tambahkan implementasi button edit dan hapus product.
+    - Buat navigation bar untuk fitur-fitur pada aplikasi. Navigation bar harus responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop. Tambahkan file baru `navbar.hmtl` pada `templates/` untuk mengimplementasikan navigation bar.
+    - Kustomisasi juga `main.html` untuk mendaftarkan apa-apa saja yang sudah diimplementasikan sebelumnya.
