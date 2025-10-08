@@ -1,0 +1,323 @@
+<!-- Modal -->
+<div id="crudModal" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+    <div id="crudModalContent" class="bg-white rounded-lg shadow-lg w-5/6 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 max-h-screen overflow-y-auto">
+
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 border-b">
+        <div>
+          <h3 class="text-xl font-semibold text-gray-900">
+            Add New Product
+          </h3>
+          <p class="text-sm text-gray-600 mt-1">Add a new football product to your lineup</p>
+        </div>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" onclick="hideModal()">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="px-6 py-4 space-y-6 form-style">
+        <form id="productForm">
+          <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Enter product name" required>
+          </div>
+          <div class="mb-4">
+            <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+            <select id="category" name="category" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" required>
+              <option value="">Choose a category</option>
+              <option value="top">Top</option>
+              <option value="shorts">Shorts</option>
+              <option value="jacket">Jacket</option>
+              <option value="shoes">Shoes</option>
+              <option value="socks">Socks</option>
+              <option value="gloves">Gloves</option>
+              <option value="ball">Ball</option>
+              <option value="lainnya">Other</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="brand" class="block text-sm font-medium text-gray-700">Brand</label>
+            <select id="brand" name="brand" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" required>
+              <option value="">Choose a brand</option>
+              <option value="nike">Nike</option>
+              <option value="adidas">Adidas</option>
+              <option value="puma">Puma</option>
+              <option value="lainnya">Other</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+            <input type="number" id="price" name="price" min="0" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Enter product price" required>
+          </div>
+          <div class="mb-4">
+            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea id="description" name="description" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Enter product description" required></textarea>
+          </div>
+          <div class="mb-4">
+            <div class="flex items-center">
+              <input id="is_featured" name="is_featured" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+              <label for="is_featured" class="ml-2 text-sm font-medium text-gray-900">Featured Product</label>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="thumbnail" class="block text-sm font-medium text-gray-700">Thumbnail URL</label>
+            <input type="url" id="thumbnail" name="thumbnail" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" placeholder="https://example.com/image.jpg">
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="flex flex-col sm:flex-row gap-4 p-6 border-t border-gray-200 rounded-b">
+        <button type="button" id="cancelButton" class="order-2 sm:order-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors text-center" onclick="hideModal()">Cancel</button>
+        <button type="submit" id="submitProduct" form="productForm" class="order-1 sm:order-2 flex-1 bg-pink-500 text-white px-6 py-3 rounded-md font-medium hover:bg-pink-600 transition-colors">Add Product</button>
+      </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+  <div id="editModalContent" class="bg-white rounded-lg shadow-lg w-5/6 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 max-h-screen overflow-y-auto">
+
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 border-b">
+          <div>
+              <h3 class="text-xl font-semibold text-gray-900">Edit Product</h3>
+              <p class="text-sm text-gray-600 mt-1">Update the details of your product</p>
+          </div>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" onclick="hideEditModal()">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="sr-only">Close modal</span>
+          </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="px-6 py-4 space-y-6 form-style">
+          <form id="editProductForm">
+              {% csrf_token %}
+              <div class="mb-4">
+                  <label for="edit-name" class="block text-sm font-medium text-gray-700">Name</label>
+                  <input type="text" id="edit-name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" required>
+              </div>
+              <div class="mb-4">
+                  <label for="edit-category" class="block text-sm font-medium text-gray-700">Category</label>
+                  <select id="edit-category" name="category" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" required>
+                      <option value="">Choose a category</option>
+                      <option value="top">Top</option>
+                      <option value="shorts">Shorts</option>
+                      <option value="jacket">Jacket</option>
+                      <option value="shoes">Shoes</option>
+                      <option value="socks">Socks</option>
+                      <option value="gloves">Gloves</option>
+                      <option value="ball">Ball</option>
+                      <option value="lainnya">Other</option>
+                  </select>
+              </div>
+              <div class="mb-4">
+                  <label for="edit-brand" class="block text-sm font-medium text-gray-700">Brand</label>
+                  <select id="edit-brand" name="brand" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" required>
+                      <option value="">Choose a brand</option>
+                      <option value="nike">Nike</option>
+                      <option value="adidas">Adidas</option>
+                      <option value="puma">Puma</option>
+                      <option value="lainnya">Other</option>
+                  </select>
+              </div>
+              <div class="mb-4">
+                  <label for="edit-price" class="block text-sm font-medium text-gray-700">Price</label>
+                  <input type="number" id="edit-price" name="price" min="0" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" required>
+              </div>
+              <div class="mb-4">
+                  <label for="edit-description" class="block text-sm font-medium text-gray-700">Description</label>
+                  <textarea id="edit-description" name="description" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2" required></textarea>
+              </div>
+              <div class="mb-4">
+                  <div class="flex items-center">
+                      <input id="edit-is_featured" name="is_featured" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+                      <label for="edit-is_featured" class="ml-2 text-sm font-medium text-gray-900">Featured Product</label>
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label for="edit-thumbnail" class="block text-sm font-medium text-gray-700">Thumbnail URL</label>
+                  <input type="url" id="edit-thumbnail" name="thumbnail" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2">
+              </div>
+          </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="flex flex-col sm:flex-row gap-4 p-6 border-t border-gray-200 rounded-b">
+          <button type="button" id="editCancelButton" class="order-2 sm:order-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors" onclick="hideEditModal()">Cancel</button>
+          <button type="submit" id="submitEditProduct" form="editProductForm" class="order-1 sm:order-2 flex-1 bg-pink-500 text-white px-6 py-3 rounded-md font-medium hover:bg-pink-600 transition-colors">Save Changes</button>
+      </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2"></div>
+
+<!-- Edit Product Modal (AJAX) -->
+<div id="editProductModal" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+  <div class="bg-white rounded-lg shadow-lg w-5/6 sm:w-3/5 md:w-1/2 lg:w-2/5 xl:w-1/3 max-h-screen overflow-y-auto p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-xl font-semibold text-gray-900">Edit Product</h3>
+      <button type="button" onclick="hideEditProductModal()" class="text-gray-400 hover:bg-gray-200 p-1.5 rounded-lg">
+        ✕
+      </button>
+    </div>
+    <form id="editProductFormAjax">
+      {% csrf_token %}
+      <input type="hidden" id="editProductId">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" id="editProductName" class="mt-1 block w-full border rounded-md px-3 py-2" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Price</label>
+        <input type="number" id="editProductPrice" class="mt-1 block w-full border rounded-md px-3 py-2" min="0" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea id="editProductDescription" class="mt-1 block w-full border rounded-md px-3 py-2" required></textarea>
+      </div>
+      <div class="flex justify-end gap-2">
+        <button type="button" onclick="hideEditProductModal()" class="px-4 py-2 border rounded-md">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete Product Modal (AJAX) -->
+<div id="deleteProductModal" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+  <div class="bg-white rounded-lg shadow-lg w-96 max-h-screen overflow-y-auto p-6">
+    <h3 class="text-xl font-semibold text-gray-900 mb-4">Delete Product</h3>
+    <p class="text-gray-600 mb-4">Are you sure you want to delete this product?</p>
+    <div class="flex justify-end gap-2">
+      <button type="button" onclick="hideDeleteProductModal()" class="px-4 py-2 border rounded-md">Cancel</button>
+      <button type="button" id="confirmDeleteBtn" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showModal() {
+      const modal = document.getElementById('crudModal');
+      const modalContent = document.getElementById('crudModalContent');
+
+      modal.classList.remove('hidden'); 
+      setTimeout(() => {
+        modalContent.classList.remove('opacity-0', 'scale-95');
+        modalContent.classList.add('opacity-100', 'scale-100');
+      }, 50); 
+  }
+
+  function hideModal() {
+      const modal = document.getElementById('crudModal');
+      const modalContent = document.getElementById('crudModalContent');
+
+      modalContent.classList.remove('opacity-100', 'scale-100');
+      modalContent.classList.add('opacity-0', 'scale-95');
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150); 
+  }
+
+  async function addProductEntry() {
+    await fetch("{% url 'main:add_product_entry_ajax' %}", {
+      method: "POST",
+      body: new FormData(document.querySelector('#productForm')),
+    })
+
+    document.getElementById("productForm").reset();
+    hideModal();
+      
+    // Show toast notification
+    showToast('Product added successfully!', '', 'success');
+
+    // Dispatch custom event to notify main.html about new data
+    document.dispatchEvent(new CustomEvent('productAdded'));
+
+    return false;
+  }
+
+  document.getElementById("productForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    addProductEntry();
+  })
+
+  function showToast(title, message = '', type = 'success') {
+    const toastContainer = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `px-4 py-3 rounded shadow-md text-white ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`;
+    toast.innerHTML = `<strong>${title}</strong> ${message}`;
+    toastContainer.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  function showEditProductModal(product) {
+    document.getElementById('editProductId').value = product.id;
+    document.getElementById('editProductName').value = product.name;
+    document.getElementById('editProductPrice').value = product.price;
+    document.getElementById('editProductDescription').value = product.description;
+    document.getElementById('editProductModal').classList.remove('hidden');
+  }
+
+  function hideEditProductModal() {
+    document.getElementById('editProductModal').classList.add('hidden');
+  }
+
+  function showDeleteProductModal(productId) {
+    document.getElementById('confirmDeleteBtn').dataset.productId = productId;
+    document.getElementById('deleteProductModal').classList.remove('hidden');
+  }
+
+  function hideDeleteProductModal() {
+    document.getElementById('deleteProductModal').classList.add('hidden');
+  }
+
+  // AJAX Edit Product
+  document.getElementById('editProductFormAjax').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const id = document.getElementById('editProductId').value;
+    const formData = new FormData(this);
+
+    const response = await fetch(`/product/${id}/edit-ajax`, {
+      method: 'POST',
+      body: formData,
+      headers: {'X-CSRFToken': formData.get('csrfmiddlewaretoken')}
+    });
+
+    if (response.ok) {
+      hideEditProductModal();
+      showToast('Product updated successfully!');
+      document.dispatchEvent(new CustomEvent('productUpdated', {detail: {id}}));
+    } else {
+      showToast('Failed to update product', '', 'error');
+    }
+  });
+
+  // AJAX Delete Product
+  document.getElementById('confirmDeleteBtn').addEventListener('click', async function() {
+    const id = this.dataset.productId;
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    const response = await fetch(`/product/${id}/delete-ajax`, {
+      method: 'POST',
+      headers: {'X-CSRFToken': csrfToken}
+    });
+
+    if (response.ok) {
+      hideDeleteProductModal();
+      showToast('Product deleted successfully!');
+      document.dispatchEvent(new CustomEvent('productDeleted', {detail: {id}}));
+    } else {
+      showToast('Failed to delete product', '', 'error');
+    }
+  });
+</script>

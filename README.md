@@ -566,3 +566,31 @@ Deque University Website belum menerapkan responsive design, ditunjukkan dengan:
     - Pada `card_product.html`, tambahkan implementasi button edit dan hapus product.
     - Buat navigation bar untuk fitur-fitur pada aplikasi. Navigation bar harus responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop. Tambahkan file baru `navbar.hmtl` pada `templates/` untuk mengimplementasikan navigation bar.
     - Kustomisasi juga `main.html` untuk mendaftarkan apa-apa saja yang sudah diimplementasikan sebelumnya.
+
+# Tugas 6: JavaScript dan AJAX
+## Apa perbedaan antara synchronous request dan asynchronous request?
+
+- Synchronous Request: Saat program mengirim permintaan ke server, eksekusi proses akan berhenti dan menunggu hingga server selesai memproses dan mengirimkan respons kembali. Eksekusi proses berikutnya dalam program, baru akan dijalankan setelah respons tersebut diterima sepenuhnya.
+- Asynchronous Request: Saat program mengirim permintaan ke server, ia tidak perlu menunggu. Program dapat langsung melanjutkan eksekusi proses berikutnya. Respons dari server akan ditangani nanti setelah tiba, secara terpisah dari alur utama.
+
+## Bagaimana AJAX bekerja di Django (alur request–response)?
+
+1. Sebuah event terjadi pada halaman browser
+2. JavaScript membuat objek XMLHttpRequest
+3. Objek XMLHttpRequest mengirimkan permintaan ke server
+4. Server memproses permintaan dari XMLHttpRequest
+5. Server mengembalikan sebuah respons ke browser
+5. Respons dibaca dan diproses oleh JavaScript pada browser
+6. JavaScript menggunakan data yang telah diproses untuk aksi berikutnya. Misalnya, memperbarui konten/data pada halaman browser.
+
+## Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+
+Jika menggunakan render, maka setiap ada permintaan, server harus memproses ulang seluruh halaman, membuat pembaruan HTML, dan mengirimkannya kembali ke browser. Namun dengan AJAX, proses ini tidak perlu dilakukan sepenuhnya, karena AJAX hanya meminta atau mengirim data tertentu ke server dan memperbarui bagian halaman yang diperlukan tanpa memuat ulang seluruh halaman. Hal ini akan mengurangi beban server, mempercepat waktu respon, dan membuat pertukaran data menjadi lebih efisien.
+
+## Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+
+Penggunaan AJAX untuk fitur Login dan Register dapat dijaga keamanannya dengan menambahkan fungsi ``strip_tags()``, yang berfungsi untuk menghapus tag HTML dari data pengguna sebelum disimpan ke database. Penambahan ``strip_tags()`` membantu mencegah serangan XSS (Cross-Site Scripting) dengan memastikan data yang tersimpan benar-benar bersih dari elemen berbahaya. Namun, penggunaan ``strip_tags()`` tidak disarankan pada field seperti username, email, dan password, karena dapat mengubah nilai asli yang dimasukkan pengguna. Sebagai alternatif, gunakan hashing bawaan Django, serta validasi karakter untuk menjaga keamanan data sensitif tanpa mengubah isinya. ``strip_tags()`` sangat berguna untuk kolom formulir registrasi yang bersifat teks bebas dan akan ditampilkan kembali ke publik, seperti nama lengkap, bio, atau alamat. Jangan lupa untuk tetap menggunakan HTTPS dan CSRF token dalam implementasinya.
+
+## Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
+
+AJAX memungkinkan interaksi yang lebih mulus dan efisien bagi pengguna karena prosesnya dilakukan secara asinkronus (di belakang layar). Artinya, saat data sedang diambil atau dikirim ke server, pengguna tetap dapat melakukan aktivitas lain tanpa harus menunggu proses selesai. Selain itu, AJAX tidak memuat ulang seluruh halaman, melainkan hanya memperbarui bagian tertentu yang diperlukan. Dengan cara ini, website menjadi lebih cepat, responsif, dan nyaman digunakan, karena setiap aksi pengguna dapat ditanggapi secara langsung tanpa jeda yang mengganggu.

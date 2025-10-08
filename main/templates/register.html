@@ -13,33 +13,13 @@
           <h2 class="text-2xl font-semibold text-gray-900 mb-2">Join Us</h2>
           <p class="text-gray-500">Create your Slide and Score account</p>
         </div>
+        
+        <!-- Error message container -->
+         <div id="error-message-container" class="mb-6 hidden">
+          <div id="error-message-box" class="px-4 py-3 rounded-md text-sm border bg-red-50 border-red-200 text-red-700"></div>
+        </div>
 
-        <!-- Form Errors Display -->
-        {% if form.non_field_errors %}
-          <div class="mb-6">
-            {% for error in form.non_field_errors %}
-              <div class="px-4 py-3 rounded text-sm border bg-red-50 border-red-200 text-red-700">
-                {{ error }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-
-        {% if form.errors %}
-          <div class="mb-6">
-            {% for field, errors in form.errors.items %}
-              {% if field != '__all__' %}
-                {% for error in errors %}
-                  <div class="px-4 py-3 rounded text-sm border bg-red-50 border-red-200 text-red-700 mb-2">
-                    <strong>{{ field|title }}:</strong> {{ error }}
-                  </div>
-                {% endfor %}
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
-
-        <form method="POST" action="" class="space-y-5">
+        <form id="register-form" method="POST" action="" class="space-y-5">
           {% csrf_token %}
           
           <div>
@@ -82,27 +62,6 @@
           </button>
         </form>
 
-        <!-- Messages Display -->
-        {% if messages %}
-          <div class="mt-6">
-            {% for message in messages %}
-              <div 
-                class="
-                  px-4 py-3 rounded text-sm border
-                  {% if message.tags == 'success' %}
-                    bg-pink-50 border-pink-200 text-pink-700
-                  {% elif message.tags == 'error' %}
-                    bg-red-50 border-red-200 text-red-700
-                  {% else %}
-                    bg-gray-50 border-gray-200 text-gray-700
-                  {% endif %}
-                ">
-                {{ message }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-
         <div class="mt-6 text-center">
           <p class="text-gray-500 text-sm">
             Already have an account? 
@@ -115,4 +74,44 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.getElementById("register-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const errorContainer = document.getElementById("error-message-container");
+    const errorBox = document.getElementById("error-message-box");
+
+    // Reset visibility
+    errorContainer.classList.add("hidden");
+
+    try {
+      const response = await fetch("{% url 'main:register_ajax' %}", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showToast('Successfully signed up!', '', 'success')
+        
+        setTimeout(() => {
+          window.location.href = data.redirect_url;
+        }, 1000);
+      } 
+      else {
+        errorBox.textContent = data.message || "Registration failed. Please check your inputs.";
+        errorContainer.classList.remove("hidden");
+      }
+    } 
+    catch (error) {
+      console.error("An error occurred:", error);
+      errorBox.textContent = "An unexpected error occurred. Please try again later";
+      errorContainer.classList.remove("hidden");
+    }
+  });
+</script>
 {% endblock content %}
